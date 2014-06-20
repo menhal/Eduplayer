@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.edufe.mobile.EduPlayer"
+    version="1.0.0">
+
+    <engines>
+        <engine name="cordova" version=">=3.2.0" />
+    </engines>
+
+	<name>EduPlayer</name>
+	<description>Play video with native support for android and ios</description>
+    <author>Menhal</author>
+    <keywords>video,android</keywords>
+	<license>MIT</license>
+    
+    <js-module src="www/EduPlayer.js" name="EduPlayer">
+		<clobbers target="EduPlayer" />
+	</js-module>
+    
+    <platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+            <feature name="EduPlayer" >
+                <param name="android-package" value="com.edufe.mobile.EduPlayer"/>
+            </feature>
+        </config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+				android:name="com.edufe.mobile.EduPlayerActivity"
+				android:configChanges="orientation|screenSize"
+				android:screenOrientation="landscape"
+				android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+			</activity>
+        </config-file>
+
+        <source-file src="src/android/EduPlayer.java" target-dir="src/com/edufe/mobile" />
+		<source-file src="src/android/EduPlayerActivity.java" target-dir="src/com/edufe/mobile" />
+		<source-file src="src/android/activity_my.xml" target-dir="res/layout" />
+	</platform>
+
+	<platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="EduPlayer">
+                <param name="ios-package" value="EduPlayer"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/EduPlayer.m" />
+        <source-file src="src/ios/EduPlayerViewController.m" />
+        
+        <header-file src="src/ios/EduPlayer.h" />
+        <header-file src="src/ios/EduPlayerViewController.h" />
+    
+        <framework src="MediaPlayer.framework" />
+    </platform>
+    
+</plugin>
